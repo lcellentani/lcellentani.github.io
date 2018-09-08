@@ -6,9 +6,37 @@
     <description>Recent content in Tags on NIH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Sat, 08 Sep 2018 11:50:57 +0200</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ios</title>
+      <link>http://localhost:1313/tags/ios/</link>
+      <pubDate>Sat, 08 Sep 2018 11:50:57 +0200</pubDate>
+      
+      <guid>http://localhost:1313/tags/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Metal</title>
+      <link>http://localhost:1313/tags/metal/</link>
+      <pubDate>Sat, 08 Sep 2018 11:50:57 +0200</pubDate>
+      
+      <guid>http://localhost:1313/tags/metal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rendering</title>
+      <link>http://localhost:1313/tags/rendering/</link>
+      <pubDate>Sat, 08 Sep 2018 11:50:57 +0200</pubDate>
+      
+      <guid>http://localhost:1313/tags/rendering/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
