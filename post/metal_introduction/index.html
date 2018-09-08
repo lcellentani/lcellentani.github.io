@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>A Introduction to Metal API - NIH</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="lUDo" />
+  <meta name="description" content="
+" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/metal_introduction/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=2.7.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="A Introduction to Metal API" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/metal_introduction/" />
+
+
+
+<meta property="article:published_time" content="2018-09-08T11:50:57&#43;02:00"/>
+
+<meta property="article:modified_time" content="2018-09-08T11:50:57&#43;02:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="A Introduction to Metal API">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-09-08T11:50:57&#43;02:00" />
+<meta itemprop="dateModified" content="2018-09-08T11:50:57&#43;02:00" />
+<meta itemprop="wordCount" content="1806">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Introduction to Metal API"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not|invented:here</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not|invented:here</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">A Introduction to Metal API</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-08 </span>
+        
+        <span class="more-meta"> 1806 word </span>
+        <span class="more-meta"> 9 min read </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      <p></p>
+
+<p>Metal is a low-overhead and high performance API to execute graphics and compute work on the GPU. The common job of a GPU is to draw geometries and the fundamental design principles of Metal aim to help applications to draw geometry extremely fast.</p>
+
+<p>Drawing geometry is done executing draw calls on the GPU. A draw call is a collection of graphics commands and states that produce a visual result on screen; each draw call requires its own graphic state vector, meaning it requires to explicitly specify the shaders, the graphics states, the data buffers, the textures and the render targets used to perform the drawing. In all previous generation of hardware graphics API like OpenGL ES, changing state vectors is a really expensive operation because all API commands must be translated in the correspondent hardware commands. The cost of this is usually all on the CPU, the one responsible of performing the such translation and all API commands must be translated before the GPU can start do any work. The following picture shows a typical sequence of draw calls and the flow of execution from the application (the CPU side) to the GPU.</p>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_00.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>Metal is built around 6 key design principles:</p>
+
+<ul>
+<li>Thinnest possible API, meaning reduce the amount of code executed between the application and the GPU.</li>
+<li>Designed to provide full support for all modern GPU hardware features.</li>
+<li>Do expensive operations less frequently.</li>
+<li>Provide predictable performance.</li>
+<li>Provide explicit control on commands submission.</li>
+<li>Optimized for CPU behavior.</li>
+</ul>
+
+<p>Almost all modern mobile games tend to manage the CPU and GPU workload targeting a certain frame rate and most of the times this target is 60 frame per seconds (fps) while other times is 30 fps. The following picture shows a common case of a game that tries to optimize the CPU and GPU workload keeping a steady 30 fps: the CPU prepares the rendering commands for a certain frame and the GPU consumes these commands during the next frame.</p>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_01.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>When everything works as expected, this setup can provide a perfect and well balanced parallelism, but this is an ideal situation because in real life most of the time the CPU can take more time to generate rendering commands than the GPU to consume them and this leave the GPU idle for a part of the frame. Looking a bit more in detail the work the CPU must execute, we can split it in 2 parts: the time spent by the CPU executing application logic and the time spent by the CPU preparing rendering API commands; usually the latter is the one that takes the majority of the available frame time. As we can observe in the following picture, the CPU could not translate all the API commands inside the target frame time and this can cause the GPU to skip a frame.</p>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_02.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>Metal tries to focus on the work of preparing rendering API commands and it provides support to reduce it at the bare minimum; this actually frees up CPU time that can be used on other activities and the majority of the times this additional time is used  to generate more draw calls.</p>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_03.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>To better understand how Metal API can achieve such result, it&rsquo;s important to understand why is the GPU programming so expensive on the CPU.</p>
+
+<p>There are 3 main reasons:</p>
+
+<ul>
+<li><strong>State validation</strong>; each time the application call a rendering API, the rendering API implementation must verify that the call is performed in the right way: the application uses the right number and type of parameters and the hardware context will move to a valid state once the call is completed. But there is more! upon an API call, the implementation must also encode the API states into the correspondent hardware states and check again other hardware states to figure out how to combine them all together to move the global context into a new one.</li>
+<li><strong>Shaders compilation</strong>; the source code of all shaders must be compiled to generate GPU machine code and this usually happen at runtime. Often the state and the shader code are not described in a way that is exactly what the hardware really expect and so when the application change certain states, it can happen that the generate machine code must be recompiled.</li>
+<li><strong>GPU work submission</strong>; states and shaders code can request resources that are not resident on the GPU side and so they must be moved in memory to a location where the GPU can access them.</li>
+</ul>
+
+<p>Because all these, what all games do is to combine together operations that share similar states and resources with the intent of reduce the workload and improve efficiency, we usually refer to this process as batching commands&hellip;but batching commands requires to run more logic on the CPU to create these batches. So the end result is that there is always a constant work of balancing between schedule the right amount of work for the CPU to produce a workload that will keep GPU busy for the entire frame and complete all this work inside the target frame time.</p>
+
+<p>The reason why Metal is different resides in the design principle do expensive operations less frequently.</p>
+
+<p>In all rendering API before Metal, specially OpenGL ES, state validation, shaders compilation and GPU work submission were happening during the drawing of a frame, making the management of the frame time constrained by things not directly under the control of the application. Metal supports offline shaders compilation and state validation upon rendering object creation and this leaves the application just the worry of submit work to the GPU and nothing more.</p>
+
+<p>To better understand all this, let&rsquo;s look in details at all the object part of the Metal API; let&rsquo;s walk through all of them:</p>
+
+<ul>
+<li>The Device (MTLDevice): this is an abstraction of the physical GPU, it&rsquo;s the thing that will consume the rendering and compute commands; this is also the go-to object to do anything in Metal as all the objects the application interacts to come from this object.</li>
+<li>The Command Queue (MTLCommandQueue): this object stores all the commands and allow the application to control the order of execution of all commands.</li>
+<li>The Command Buffer (MTLCommandBuffer): this object stores translated hardware commands ready for consumption by the GPU.</li>
+<li>The Command Encoder (MTLCommandEncoder):  this object is responsible of translating rendering and compute commands into hardware commands.</li>
+<li>The States: the state of the GPU is described by a series of state objects: the configuration of the framebuffers, the type of blending, the depth function, the different samples to use when dealing with textures are all stored in objects.</li>
+<li>The Code: this represents the source code of all the vertex and fragment shaders declared and used by the application.</li>
+<li>The Resources: these are objects that store in memory the data representing resources like vertex buffers or the textures or the set of shader constants.</li>
+</ul>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_04.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>As described in the picture here above, from a instance of MTLDevice the application creates a MTLCommandQueue object; typically an application will create one or more command queues at the initialization and then will keep those queues around throughout its lifetime. Using an instance of a MTLCommandQueue object, the application creates one or more MTLCommandBuffer objects to store the hardware commands that will be submitted to a MTLCommandEncoder object. In order to generate the commands it&rsquo;s necessary specify some information to the MTLCommandEncoder object and this is done by attaching various object before being able to use it. In order to create resource objects Metal provide a mechanism built around data structures called descriptors. A descriptors allow the application to specify all the necessary states required to create a certain resource object. The same concept apply for the state objects: the API provide descriptors that the application must use to create them. In the diagram above it&rsquo;s possible to see two of the most used state objects: the Render Pipeline State object and the Depth Stencil State object respectively created with a MTLRenderPipelineDescriptor and a MTLDepthStencilDescriptor; these two objects allow the application to setup the various rendering states of the GPU. The last essential state object is the Render Pass object that can be created through a MTLRenderPassDescriptor and this object describe how the application will output the geometries.</p>
+
+<p>The reason why Metal splits up the state between descriptor and state/resource objects is because once the application has created everything and declared all the different states combinations, Metal bakes all these in a small number states objects already translated to their hardware format with shaders already compiled and state validated; in this way the only work left to do is to submit and execute commands meaning draw calls are performed really fast!
+Commands Submission Model</p>
+
+
+<figure class="center">
+    
+        <img src="/img/metal_intro_05.jpg" alt="img" />
+    
+    
+</figure>
+
+
+<p>As said Command Encoders store API commands as hardware commands inside Command Buffer objects. Command Buffer objects are extremely lightweight objects and usually applications create large number of them in the execution of a frame; Command Buffer objects are thread-safe, so it&rsquo;s quite common to prepare them in parallel using multiple threads and when they are all ready submit all in once to control the order they will be executed by the GPU. What makes Command Encoder so efficient is the fact they don&rsquo;t just store some work that later must be consume by the CPU before being execute, they generate command immediately without deferred state validation&hellip;it&rsquo;s like make a direct call to the GPU driver.
+Resource Update Model</p>
+
+<p>The resource model in Metal is designed to support an unified memory system meaning the CPU and the GPU share the same storage space for exchanging data, this remove the need of perform implicit copies to allow the GPU to see data handled by the CPU and vice-versa. Metal provide also support for an automatic cache coherency model and assure CPU and GPU will observe command buffer execution boundaries while touching the memory; the only thing required to the application it&rsquo;s to assure the rendering work is scheduled to occur in such way CPU and GPU won&rsquo;t write on the same chunk of memory at the same time. Delegating the scheduling and the synchronization of the rendering work to the application, it frees the API from perform any internal and/or implicit extra synchronization block producing a significant boost in performances.</p>
+
+<p>Talking of resources the key concept to highlight is that the structure of resource is immutable, once created it can&rsquo;t change; this allow to avoid costly resource validation when they are used. Of course the content of resources can change on any time and because the model is build around the concept of an unified system and the read/write synchronization is under the control of the application, there is no need to have a lock API to access the data of a resource; so on Metal the update of a resources requires to get a pointer in memory and read/write the data.</p>
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="lcellentani@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/6315686/lcellentani" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/iluan74" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/ludovicocellentani/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lcellentani" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lUDo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=2.7.0"></script>
+
+
+
+
+</body>
+</html>
