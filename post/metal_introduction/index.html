@@ -17,8 +17,7 @@
 
 
 <meta name="author" content="lUDo" />
-  <meta name="description" content="
-" />
+  <meta name="description" content="" />
 
 
 
@@ -26,10 +25,10 @@
 
 
 
-<meta name="generator" content="Hugo 0.31.1" />
+<meta name="generator" content="Hugo 0.56.3" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/metal_introduction/" />
+<link rel="canonical" href="https://lcellentani.github.io/post/metal_introduction/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -50,24 +49,9 @@
 <meta property="og:title" content="A Introduction to Metal API" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/metal_introduction/" />
-
-
-
-<meta property="article:published_time" content="2018-09-08T11:50:57&#43;02:00"/>
-
-<meta property="article:modified_time" content="2018-09-08T11:50:57&#43;02:00"/>
-
-
-
-
-
-
-
-
-
-
-
+<meta property="og:url" content="https://lcellentani.github.io/post/metal_introduction/" />
+<meta property="article:published_time" content="2018-09-08T11:50:57+02:00" />
+<meta property="article:modified_time" content="2018-09-08T11:50:57+02:00" />
 <meta itemprop="name" content="A Introduction to Metal API">
 <meta itemprop="description" content="">
 
@@ -79,7 +63,8 @@
 
 
 <meta itemprop="keywords" content="metal,ios,rendering," />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Introduction to Metal API"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Introduction to Metal API"/>
 <meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
@@ -163,20 +148,14 @@
 
     
     <div class="post-content">
-      <p></p>
-
-<p>Metal is a low-overhead and high performance API to execute graphics and compute work on the GPU. The common job of a GPU is to draw geometries and the fundamental design principles of Metal aim to help applications to draw geometry extremely fast.</p>
+      <p>Metal is a low-overhead and high performance API to execute graphics and compute work on the GPU. The common job of a GPU is to draw geometries and the fundamental design principles of Metal aim to help applications to draw geometry extremely fast.</p>
 
 <p>Drawing geometry is done executing draw calls on the GPU. A draw call is a collection of graphics commands and states that produce a visual result on screen; each draw call requires its own graphic state vector, meaning it requires to explicitly specify the shaders, the graphics states, the data buffers, the textures and the render targets used to perform the drawing. In all previous generation of hardware graphics API like OpenGL ES, changing state vectors is a really expensive operation because all API commands must be translated in the correspondent hardware commands. The cost of this is usually all on the CPU, the one responsible of performing the such translation and all API commands must be translated before the GPU can start do any work. The following picture shows a typical sequence of draw calls and the flow of execution from the application (the CPU side) to the GPU.</p>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_00.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_00.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>Metal is built around 6 key design principles:</p>
 
@@ -191,36 +170,24 @@
 
 <p>Almost all modern mobile games tend to manage the CPU and GPU workload targeting a certain frame rate and most of the times this target is 60 frame per seconds (fps) while other times is 30 fps. The following picture shows a common case of a game that tries to optimize the CPU and GPU workload keeping a steady 30 fps: the CPU prepares the rendering commands for a certain frame and the GPU consumes these commands during the next frame.</p>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_01.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_01.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>When everything works as expected, this setup can provide a perfect and well balanced parallelism, but this is an ideal situation because in real life most of the time the CPU can take more time to generate rendering commands than the GPU to consume them and this leave the GPU idle for a part of the frame. Looking a bit more in detail the work the CPU must execute, we can split it in 2 parts: the time spent by the CPU executing application logic and the time spent by the CPU preparing rendering API commands; usually the latter is the one that takes the majority of the available frame time. As we can observe in the following picture, the CPU could not translate all the API commands inside the target frame time and this can cause the GPU to skip a frame.</p>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_02.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_02.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>Metal tries to focus on the work of preparing rendering API commands and it provides support to reduce it at the bare minimum; this actually frees up CPU time that can be used on other activities and the majority of the times this additional time is used  to generate more draw calls.</p>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_03.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_03.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>To better understand how Metal API can achieve such result, it&rsquo;s important to understand why is the GPU programming so expensive on the CPU.</p>
 
@@ -250,28 +217,20 @@
 <li>The Resources: these are objects that store in memory the data representing resources like vertex buffers or the textures or the set of shader constants.</li>
 </ul>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_04.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_04.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>As described in the picture here above, from a instance of MTLDevice the application creates a MTLCommandQueue object; typically an application will create one or more command queues at the initialization and then will keep those queues around throughout its lifetime. Using an instance of a MTLCommandQueue object, the application creates one or more MTLCommandBuffer objects to store the hardware commands that will be submitted to a MTLCommandEncoder object. In order to generate the commands it&rsquo;s necessary specify some information to the MTLCommandEncoder object and this is done by attaching various object before being able to use it. In order to create resource objects Metal provide a mechanism built around data structures called descriptors. A descriptors allow the application to specify all the necessary states required to create a certain resource object. The same concept apply for the state objects: the API provide descriptors that the application must use to create them. In the diagram above it&rsquo;s possible to see two of the most used state objects: the Render Pipeline State object and the Depth Stencil State object respectively created with a MTLRenderPipelineDescriptor and a MTLDepthStencilDescriptor; these two objects allow the application to setup the various rendering states of the GPU. The last essential state object is the Render Pass object that can be created through a MTLRenderPassDescriptor and this object describe how the application will output the geometries.</p>
 
 <p>The reason why Metal splits up the state between descriptor and state/resource objects is because once the application has created everything and declared all the different states combinations, Metal bakes all these in a small number states objects already translated to their hardware format with shaders already compiled and state validated; in this way the only work left to do is to submit and execute commands meaning draw calls are performed really fast!
 Commands Submission Model</p>
 
-
 <figure class="center">
-    
-        <img src="/img/metal_intro_05.jpg" alt="img" />
-    
-    
+    <img src="/img/metal_intro_05.jpg"
+         alt="img"/> 
 </figure>
-
 
 <p>As said Command Encoders store API commands as hardware commands inside Command Buffer objects. Command Buffer objects are extremely lightweight objects and usually applications create large number of them in the execution of a frame; Command Buffer objects are thread-safe, so it&rsquo;s quite common to prepare them in parallel using multiple threads and when they are all ready submit all in once to control the order they will be executed by the GPU. What makes Command Encoder so efficient is the fact they don&rsquo;t just store some work that later must be consume by the CPU before being execute, they generate command immediately without deferred state validation&hellip;it&rsquo;s like make a direct call to the GPU driver.
 Resource Update Model</p>
@@ -317,7 +276,7 @@ Resource Update Model</p>
       <a href="https://twitter.com/iluan74" class="iconfont icon-twitter" title="twitter"></a>
       <a href="https://www.linkedin.com/in/ludovicocellentani/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lcellentani" class="iconfont icon-github" title="github"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://lcellentani.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -334,7 +293,9 @@ Resource Update Model</p>
 
   <span class="copyright-year">
     &copy; 
-    2018
+    
+      2018 - 
+    2019
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

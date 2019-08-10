@@ -1,66 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:1313/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://lcellentani.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/post/metal_introduction/</loc>
+    <loc>https://lcellentani.github.io/post/metal_introduction/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
-    <changefreq>weekly</changefreq>
+    <loc>https://lcellentani.github.io/categories/</loc>
+    <lastmod>2018-09-08T11:50:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/ios/</loc>
+    <loc>https://lcellentani.github.io/categories/metal/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/metal/</loc>
+    <loc>https://lcellentani.github.io/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/metal/</loc>
+    <loc>https://lcellentani.github.io/post/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://lcellentani.github.io/tags/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://lcellentani.github.io/tags/ios/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/rendering/</loc>
+    <loc>https://lcellentani.github.io/tags/metal/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://lcellentani.github.io/tags/rendering/</loc>
     <lastmod>2018-09-08T11:50:57+02:00</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
