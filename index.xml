@@ -6,10 +6,19 @@
     <description>Recent content on NIH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 08 Sep 2018 11:50:57 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 11:52:45 +0200</lastBuildDate>
     
 	<atom:link href="https://lcellentani.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Resource Acquisition is Initialisation (RAII)</title>
+      <link>https://lcellentani.github.io/post/cpp_raii/</link>
+      <pubDate>Sat, 28 Sep 2019 11:52:45 +0200</pubDate>
+      
+      <guid>https://lcellentani.github.io/post/cpp_raii/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>A Introduction to Metal API</title>
