@@ -6,10 +6,19 @@
     <description>Recent content on NIH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Sep 2019 11:52:45 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 12:23:42 +0200</lastBuildDate>
     
 	<atom:link href="https://lcellentani.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>scoped_guard: a practical use of RAII</title>
+      <link>https://lcellentani.github.io/post/cpp_scopedguard/</link>
+      <pubDate>Sun, 29 Sep 2019 12:23:42 +0200</pubDate>
+      
+      <guid>https://lcellentani.github.io/post/cpp_scopedguard/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Resource Acquisition is Initialisation (RAII)</title>
