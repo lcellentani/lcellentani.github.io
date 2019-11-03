@@ -6,7 +6,7 @@
     <description>Recent content in Tags on NIH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 29 Sep 2019 12:23:42 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 05 Oct 2019 23:25:01 +0200</lastBuildDate>
     
 	<atom:link href="https://lcellentani.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>c&#43;&#43;</title>
       <link>https://lcellentani.github.io/tags/c&#43;&#43;/</link>
-      <pubDate>Sun, 29 Sep 2019 12:23:42 +0200</pubDate>
+      <pubDate>Sat, 05 Oct 2019 23:25:01 +0200</pubDate>
       
       <guid>https://lcellentani.github.io/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cpp</title>
+      <link>https://lcellentani.github.io/tags/cpp/</link>
+      <pubDate>Sat, 05 Oct 2019 23:25:01 +0200</pubDate>
+      
+      <guid>https://lcellentani.github.io/tags/cpp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://lcellentani.github.io/tags/programming/</link>
+      <pubDate>Sat, 05 Oct 2019 23:25:01 +0200</pubDate>
+      
+      <guid>https://lcellentani.github.io/tags/programming/</guid>
       <description></description>
     </item>
     
