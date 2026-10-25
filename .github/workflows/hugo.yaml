@@ -1,0 +1,58 @@
+name: Build and deploy site
+
+on:
+  push:
+    branches: [master, hugo-setup]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # The PaperMod theme needs a recent Hugo (see themes/PaperMod/theme.toml, min_version).
+      # This installs the latest extended release. After the first green build, pin the
+      # version printed below by replacing the gh command with a fixed download URL.
+      - name: Install Hugo (latest extended)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download --repo gohugoio/hugo \
+            --pattern 'hugo_extended_[0-9]*_linux-amd64.tar.gz' --dir "$RUNNER_TEMP/hugo"
+          tar -xzf "$RUNNER_TEMP"/hugo/hugo_extended_*_linux-amd64.tar.gz -C "$RUNNER_TEMP/hugo" hugo
+          sudo mv "$RUNNER_TEMP/hugo/hugo" /usr/local/bin/hugo
+          hugo version
+
+      - name: Build the site
+        run: hugo --gc --minify
+
+      - name: Upload the built site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    # Only the master branch is published. Other branches and pull requests just build.
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
